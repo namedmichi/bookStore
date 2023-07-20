@@ -8,7 +8,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import de.mst.selberstore.IntegrationTest;
 import de.mst.selberstore.domain.Book;
 import de.mst.selberstore.repository.BookRepository;
-import de.mst.selberstore.service.criteria.BookCriteria;
 import jakarta.persistence.EntityManager;
 import java.util.List;
 import java.util.Random;
@@ -21,7 +20,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
 
 /**
  * Integration tests for the {@link BookResource} REST controller.

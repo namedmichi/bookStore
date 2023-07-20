@@ -10,6 +10,9 @@ import NavbarComponent from './layouts/navbar/navbar.component';
 import LoginComponent from './login/login.component';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
+import { BookCardComponent } from './book-card/book-card.component';
+import { BookSearchComponent } from './book-search/book-search.component';
+import { BookDetailCardComponent } from './book-detail-card/book-detail-card.component';
 
 @NgModule({
   imports: [
@@ -24,6 +27,14 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access.service'
           path: '',
           component: NavbarComponent,
           outlet: 'navbar',
+        },
+        {
+          path: 'book-card',
+          component: BookCardComponent,
+        },
+        {
+          path: 'book-search',
+          component: BookSearchComponent,
         },
         {
           path: 'admin',
@@ -45,6 +56,10 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access.service'
         {
           path: '',
           loadChildren: () => import(`./entities/entity-routing.module`).then(({ EntityRoutingModule }) => EntityRoutingModule),
+        },
+        {
+          path: ':myBook',
+          component: BookDetailCardComponent,
         },
         ...errorRoute,
       ],

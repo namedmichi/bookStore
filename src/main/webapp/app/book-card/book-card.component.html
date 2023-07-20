@@ -1,0 +1,25 @@
+<div class="bookCardContainer">
+  <div>
+    <p>
+      <span>Titel: </span> <br />
+      {{ book.title }}
+    </p>
+    <p *ngIf="book.subTitle !== 'null'">
+      <span> Untertitel:</span> <br />
+      {{ book.subTitle }}
+    </p>
+    <p *ngIf="book.author !== 'null'">
+      <span>Autor: </span> <br />
+      {{ book.author }}
+    </p>
+    <p *ngIf="book.listPrice !== 'null'">
+      <span>Preis: </span> <br />
+      {{ book.listPrice }}€
+    </p>
+    <p *ngIf="book.description !== 'null'">
+      <span>Beschreibung: </span> <br />
+      {{ book.description }}
+    </p>
+  </div>
+  <img src="{{ book.image }}" alt="" />
+</div>

@@ -4,7 +4,6 @@ import de.mst.selberstore.domain.*; // for static metamodels
 import de.mst.selberstore.domain.Book;
 import de.mst.selberstore.repository.BookRepository;
 import de.mst.selberstore.service.criteria.BookCriteria;
-import jakarta.persistence.criteria.JoinType;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

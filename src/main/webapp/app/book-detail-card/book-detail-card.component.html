@@ -1,0 +1,63 @@
+<div>
+  <div class="bookDetailCardContainer">
+    <img src="{{ book.image }}" alt="" />
+    <div class="bookText">
+      <p>
+        <span>Titel: </span> <br />
+        {{ book.title }}
+      </p>
+      <p *ngIf="book.subTitle !== 'null'">
+        <span> Untertitel:</span> <br />
+        {{ book.subTitle }}
+      </p>
+      <p *ngIf="book.author !== 'null'">
+        <span>Autor: </span> <br />
+        {{ book.author }}
+      </p>
+      <p *ngIf="book.listPrice !== 'null'">
+        <span>Preis: </span> <br />
+        {{ book.listPrice }}€
+      </p>
+      <p *ngIf="book.longDescription !== 'null'">
+        <span>Beschreibung: </span> <br />
+        {{ book.description }}
+      </p>
+      <p *ngIf="book.publisher !== 'null'">
+        <span>Verlag: </span> <br />
+        {{ book.publisher }}
+      </p>
+      <p *ngIf="book.pageCount !== -999">
+        <span>Seitenanzahl: </span> <br />
+        {{ book.pageCount }}
+      </p>
+      <p *ngIf="book.averageRating !== -999">
+        <span>Durchschnittliche Bewertung: </span> <br />
+        {{ book.averageRating }}
+      </p>
+      <p *ngIf="book.ratingCount !== -999">
+        <span>Anzahl der Bewertungen: </span> <br />
+        {{ book.ratingCount }}
+      </p>
+      <p *ngIf="book.language !== 'null'">
+        <span>Sprache: </span> <br />
+        {{ book.language }}
+      </p>
+      <p *ngIf="book.isbn !== 'null'">
+        <span>ISBN-10: </span> <br />
+        {{ book.isbn }}
+      </p>
+      <p *ngIf="book.infoLink">
+        <span>Link: </span> <br />
+        <a href="{{ book.infoLink }}" target="_blank">{{ book.infoLink }}</a>
+      </p>
+      <p *ngIf="book.webReaderLink !== 'null'">
+        <span>WebReaderLink: </span> <br />
+        <a href="{{ book.webReaderLink }}" target="_blank">{{ book.webReaderLink }}</a>
+      </p>
+      <p *ngIf="book.textSnippet !== 'null'">
+        <span>TextSnippet: </span> <br />
+        {{ book.textSnippet }}
+      </p>
+    </div>
+  </div>
+</div>

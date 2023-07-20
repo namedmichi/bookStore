@@ -14,7 +14,6 @@ import de.mst.selberstore.security.AuthoritiesConstants;
 import de.mst.selberstore.service.UserService;
 import de.mst.selberstore.service.dto.AdminUserDTO;
 import de.mst.selberstore.service.dto.PasswordChangeDTO;
-import de.mst.selberstore.service.dto.UserDTO;
 import de.mst.selberstore.web.rest.vm.KeyAndPasswordVM;
 import de.mst.selberstore.web.rest.vm.ManagedUserVM;
 import java.time.Instant;

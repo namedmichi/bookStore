@@ -16,6 +16,8 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "useDefineForClassFields": false,
+    "noImplicitAny": false,
+    "strictPropertyInitialization": false,
     "target": "es2022",
     "module": "es2020",
     "types": [],

@@ -1,6 +1,5 @@
 package de.mst.selberstore;
 
-import de.mst.selberstore.BuecherStoreApp;
 import de.mst.selberstore.config.AsyncSyncConfiguration;
 import de.mst.selberstore.config.EmbeddedSQL;
 import java.lang.annotation.ElementType;
