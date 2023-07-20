@@ -1,0 +1,53 @@
+application {
+  config {
+    baseName BuecherStore
+    applicationType monolith
+    packageName de.mst.selberstore
+    
+    clientFramework angular
+    clientTheme flatly    
+    
+    authenticationType jwt,
+    
+    devDatabaseType h2Disk
+    prodDatabaseType mysql
+    buildTool maven    
+    enableHibernateCache false
+    
+    enableTranslation true
+    nativeLanguage de
+    languages [de, en]
+    
+
+  }  
+  entities *
+
+}
+
+
+entity Book{
+    name String required,
+    title String,
+    description TextBlob,
+    subTitle String,
+    publisher String,
+    author String,
+    listPrice String,
+    language String,
+    retailPrice String,
+    image String,
+    pageCount Integer,
+    averageRating Float,
+    ratingCount Integer, 
+    infoLink String,
+    webReaderLink String,
+    isbn TextBlob,
+    longDescription TextBlob,
+    textSnippet TextBlob
+}
+
+
+
+service all with serviceImpl
+paginate all with pagination
+filter all

@@ -1,0 +1,100 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="book">
+      <h2 data-cy="bookDetailsHeading"><span jhiTranslate="buecherStoreApp.book.detail.title">Book</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ book.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="buecherStoreApp.book.name">Name</span></dt>
+        <dd>
+          <span>{{ book.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="buecherStoreApp.book.title">Title</span></dt>
+        <dd>
+          <span>{{ book.title }}</span>
+        </dd>
+        <dt><span jhiTranslate="buecherStoreApp.book.description">Description</span></dt>
+        <dd>
+          <span>{{ book.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="buecherStoreApp.book.subTitle">Sub Title</span></dt>
+        <dd>
+          <span>{{ book.subTitle }}</span>
+        </dd>
+        <dt><span jhiTranslate="buecherStoreApp.book.publisher">Publisher</span></dt>
+        <dd>
+          <span>{{ book.publisher }}</span>
+        </dd>
+        <dt><span jhiTranslate="buecherStoreApp.book.author">Author</span></dt>
+        <dd>
+          <span>{{ book.author }}</span>
+        </dd>
+        <dt><span jhiTranslate="buecherStoreApp.book.listPrice">List Price</span></dt>
+        <dd>
+          <span>{{ book.listPrice }}</span>
+        </dd>
+        <dt><span jhiTranslate="buecherStoreApp.book.language">Language</span></dt>
+        <dd>
+          <span>{{ book.language }}</span>
+        </dd>
+        <dt><span jhiTranslate="buecherStoreApp.book.retailPrice">Retail Price</span></dt>
+        <dd>
+          <span>{{ book.retailPrice }}</span>
+        </dd>
+        <dt><span jhiTranslate="buecherStoreApp.book.image">Image</span></dt>
+        <dd>
+          <span>{{ book.image }}</span>
+        </dd>
+        <dt><span jhiTranslate="buecherStoreApp.book.pageCount">Page Count</span></dt>
+        <dd>
+          <span>{{ book.pageCount }}</span>
+        </dd>
+        <dt><span jhiTranslate="buecherStoreApp.book.averageRating">Average Rating</span></dt>
+        <dd>
+          <span>{{ book.averageRating }}</span>
+        </dd>
+        <dt><span jhiTranslate="buecherStoreApp.book.ratingCount">Rating Count</span></dt>
+        <dd>
+          <span>{{ book.ratingCount }}</span>
+        </dd>
+        <dt><span jhiTranslate="buecherStoreApp.book.infoLink">Info Link</span></dt>
+        <dd>
+          <span>{{ book.infoLink }}</span>
+        </dd>
+        <dt><span jhiTranslate="buecherStoreApp.book.webReaderLink">Web Reader Link</span></dt>
+        <dd>
+          <span>{{ book.webReaderLink }}</span>
+        </dd>
+        <dt><span jhiTranslate="buecherStoreApp.book.isbn">Isbn</span></dt>
+        <dd>
+          <span>{{ book.isbn }}</span>
+        </dd>
+        <dt><span jhiTranslate="buecherStoreApp.book.longDescription">Long Description</span></dt>
+        <dd>
+          <span>{{ book.longDescription }}</span>
+        </dd>
+        <dt><span jhiTranslate="buecherStoreApp.book.textSnippet">Text Snippet</span></dt>
+        <dd>
+          <span>{{ book.textSnippet }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Zurück</span>
+      </button>
+
+      <button type="button" [routerLink]="['/book', book.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Bearbeiten</span>
+      </button>
+    </div>
+  </div>
+</div>

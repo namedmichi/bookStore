@@ -1,0 +1,175 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-book-heading" data-cy="BookCreateUpdateHeading" jhiTranslate="buecherStoreApp.book.home.createOrEditLabel">
+        Book erstellen oder bearbeiten
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="buecherStoreApp.book.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+              Dieses Feld wird benötigt.
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="buecherStoreApp.book.title" for="field_title">Title</label>
+          <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="buecherStoreApp.book.description" for="field_description">Description</label>
+          <textarea
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="buecherStoreApp.book.subTitle" for="field_subTitle">Sub Title</label>
+          <input type="text" class="form-control" name="subTitle" id="field_subTitle" data-cy="subTitle" formControlName="subTitle" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="buecherStoreApp.book.publisher" for="field_publisher">Publisher</label>
+          <input type="text" class="form-control" name="publisher" id="field_publisher" data-cy="publisher" formControlName="publisher" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="buecherStoreApp.book.author" for="field_author">Author</label>
+          <input type="text" class="form-control" name="author" id="field_author" data-cy="author" formControlName="author" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="buecherStoreApp.book.listPrice" for="field_listPrice">List Price</label>
+          <input type="text" class="form-control" name="listPrice" id="field_listPrice" data-cy="listPrice" formControlName="listPrice" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="buecherStoreApp.book.language" for="field_language">Language</label>
+          <input type="text" class="form-control" name="language" id="field_language" data-cy="language" formControlName="language" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="buecherStoreApp.book.retailPrice" for="field_retailPrice">Retail Price</label>
+          <input
+            type="text"
+            class="form-control"
+            name="retailPrice"
+            id="field_retailPrice"
+            data-cy="retailPrice"
+            formControlName="retailPrice"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="buecherStoreApp.book.image" for="field_image">Image</label>
+          <input type="text" class="form-control" name="image" id="field_image" data-cy="image" formControlName="image" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="buecherStoreApp.book.pageCount" for="field_pageCount">Page Count</label>
+          <input type="number" class="form-control" name="pageCount" id="field_pageCount" data-cy="pageCount" formControlName="pageCount" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="buecherStoreApp.book.averageRating" for="field_averageRating">Average Rating</label>
+          <input
+            type="number"
+            class="form-control"
+            name="averageRating"
+            id="field_averageRating"
+            data-cy="averageRating"
+            formControlName="averageRating"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="buecherStoreApp.book.ratingCount" for="field_ratingCount">Rating Count</label>
+          <input
+            type="number"
+            class="form-control"
+            name="ratingCount"
+            id="field_ratingCount"
+            data-cy="ratingCount"
+            formControlName="ratingCount"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="buecherStoreApp.book.infoLink" for="field_infoLink">Info Link</label>
+          <input type="text" class="form-control" name="infoLink" id="field_infoLink" data-cy="infoLink" formControlName="infoLink" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="buecherStoreApp.book.webReaderLink" for="field_webReaderLink">Web Reader Link</label>
+          <input
+            type="text"
+            class="form-control"
+            name="webReaderLink"
+            id="field_webReaderLink"
+            data-cy="webReaderLink"
+            formControlName="webReaderLink"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="buecherStoreApp.book.isbn" for="field_isbn">Isbn</label>
+          <textarea class="form-control" name="isbn" id="field_isbn" data-cy="isbn" formControlName="isbn"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="buecherStoreApp.book.longDescription" for="field_longDescription">Long Description</label>
+          <textarea
+            class="form-control"
+            name="longDescription"
+            id="field_longDescription"
+            data-cy="longDescription"
+            formControlName="longDescription"
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="buecherStoreApp.book.textSnippet" for="field_textSnippet">Text Snippet</label>
+          <textarea
+            class="form-control"
+            name="textSnippet"
+            id="field_textSnippet"
+            data-cy="textSnippet"
+            formControlName="textSnippet"
+          ></textarea>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Abbrechen</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Speichern</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

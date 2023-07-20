@@ -1,0 +1,41 @@
+{
+  "buecherStoreApp": {
+    "book": {
+      "home": {
+        "title": "Books",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Book",
+        "createOrEditLabel": "Create or edit a Book",
+        "notFound": "No Books found"
+      },
+      "created": "A new Book is created with identifier {{ param }}",
+      "updated": "A Book is updated with identifier {{ param }}",
+      "deleted": "A Book is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Book {{ id }}?"
+      },
+      "detail": {
+        "title": "Book"
+      },
+      "id": "ID",
+      "name": "Name",
+      "title": "Title",
+      "description": "Description",
+      "subTitle": "Sub Title",
+      "publisher": "Publisher",
+      "author": "Author",
+      "listPrice": "List Price",
+      "language": "Language",
+      "retailPrice": "Retail Price",
+      "image": "Image",
+      "pageCount": "Page Count",
+      "averageRating": "Average Rating",
+      "ratingCount": "Rating Count",
+      "infoLink": "Info Link",
+      "webReaderLink": "Web Reader Link",
+      "isbn": "Isbn",
+      "longDescription": "Long Description",
+      "textSnippet": "Text Snippet"
+    }
+  }
+}

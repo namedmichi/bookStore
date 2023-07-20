@@ -1,0 +1,90 @@
+{
+  "applications": ["BuecherStore"],
+  "changelogDate": "20230720205721",
+  "entityTableName": "book",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "subTitle",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "publisher",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "author",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "listPrice",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "language",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "retailPrice",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "image",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "pageCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "averageRating",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "ratingCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "infoLink",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "webReaderLink",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isbn",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "longDescription",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "textSnippet",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Book",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}
