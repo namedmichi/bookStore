@@ -4,7 +4,12 @@
   <mat-label>Name eingeben</mat-label>
   <input (keydown)="searchName()" matInput placeholder="Name" id="nameInput" />
 </mat-form-field>
-
+<mat-form-field>
+  <mat-label>Sortierung</mat-label>
+  <mat-select [formControl]="toppings" multiple id="sortInput">
+    <mat-option *ngFor="let topping of toppingList" [value]="topping" (click)="addSort(topping)">{{ topping }}</mat-option>
+  </mat-select>
+</mat-form-field>
 <div class="row">
   <div class="bookContainer">
     <jhi-book-card *ngFor="let item of books" [book]="item" class="bookCard" routerLink="{{ item.id }}"></jhi-book-card>

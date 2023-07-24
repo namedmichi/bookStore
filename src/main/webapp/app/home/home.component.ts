@@ -10,21 +10,43 @@ import { Account } from 'app/core/auth/account.model';
 import { BookCardComponent } from '../book-card/book-card.component';
 import { IBook } from '../entities/book/book.model';
 import { forkJoin } from 'rxjs'; // Don't forget to import forkJoin
-import { MatInputModule } from '@angular/material/input';
-import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   standalone: true,
   selector: 'jhi-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [SharedModule, RouterModule, BookCardComponent, MatFormFieldModule, MatInputModule],
+  imports: [SharedModule, RouterModule, BookCardComponent, FormsModule, ReactiveFormsModule],
+  animations: [
+    trigger('slideInOut', [
+      state(
+        'in',
+        style({
+          transform: 'translate3d(0, 0, 0)',
+        })
+      ),
+      state(
+        'out',
+        style({
+          transform: 'translate3d(100%, 0, 0)',
+        })
+      ),
+      transition('in => out', animate('400ms ease-in-out')),
+      transition('out => in', animate('400ms ease-in-out')),
+    ]),
+  ],
 })
 export default class HomeComponent implements OnInit, OnDestroy {
   account: Account | null = null;
   books: IBook[] = [];
   bookCount: number = 0;
-
+  toppings = new FormControl('');
+  toppingList: string[] = ['Name', 'Preis', 'Seitenanzahl', 'ISBN', 'Sprache'];
+  sortString: string = '&sort=';
+  sortCount: number = 0;
+  sortBool: boolean = false;
   private readonly destroy$ = new Subject<void>();
 
   constructor(private accountService: AccountService, private router: Router, private http: HttpClient) {}
@@ -35,6 +57,24 @@ export default class HomeComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(account => (this.account = account));
     this.getBooks();
+  }
+  addSort(item) {
+    console.log(item);
+    if (this.sortString.includes(item + ',')) {
+      this.sortString = this.sortString.replace(item + ',', '');
+      this.sortCount--;
+      if (this.sortCount == 0) {
+        this.sortBool = false;
+        console.log(this.sortString);
+        console.log(this.sortBool);
+      }
+      return;
+    }
+    this.sortString = this.sortString + item + ',';
+    this.sortCount++;
+    this.sortBool = true;
+    console.log(this.sortString);
+    console.log(this.sortBool);
   }
 
   getBooks() {
@@ -56,7 +96,9 @@ export default class HomeComponent implements OnInit, OnDestroy {
 
         for (let index = 0; index < pages; index++) {
           var url = 'http://localhost:9000/api/books?page=' + index + '&size=20';
-
+          if (this.sortBool) {
+            url = url + this.sortString;
+          }
           this.http.get(url, { headers }).subscribe(
             response => {
               console.log(response);
@@ -121,6 +163,10 @@ export default class HomeComponent implements OnInit, OnDestroy {
         for (let index = 0; index < pages; index++) {
           var url = 'http://localhost:9000/api/books?page=' + index + '&size=20';
           url = url + '&' + searchString;
+
+          if (this.sortBool) {
+            url = url + this.sortString;
+          }
           this.http.get(url, { headers }).subscribe(
             response => {
               console.log(response);
