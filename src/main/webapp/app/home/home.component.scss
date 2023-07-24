@@ -24,9 +24,10 @@ Main page styles
 .bookContainer {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .bookCard {
-  width: 620px;
+  width: 31%;
   height: 480px;
   margin-right: 20px;
   margin-left: 20px;
@@ -34,10 +35,16 @@ Main page styles
   padding: 20px;
   border-radius: 6px;
   margin-bottom: 16px;
+  cursor: pointer;
 }
-.heading {
+.heading,
+.bookCounter {
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 3.3rem;
+}
+#nameFormField {
+  margin-left: 30px;
+  margin-bottom: 20px;
 }

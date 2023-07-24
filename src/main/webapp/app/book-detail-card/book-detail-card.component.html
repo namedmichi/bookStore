@@ -1,4 +1,4 @@
-<div>
+<div class="bookWraper">
   <div class="bookDetailCardContainer">
     <img src="{{ book.image }}" alt="" />
     <div class="bookText">
@@ -20,7 +20,11 @@
       </p>
       <p *ngIf="book.longDescription !== 'null'">
         <span>Beschreibung: </span> <br />
-        {{ book.description }}
+        {{ book.longDescription }}
+      </p>
+      <p *ngIf="book.textSnippet !== 'null'">
+        <span>TextSnippet: </span> <br />
+        {{ book.textSnippet }}
       </p>
       <p *ngIf="book.publisher !== 'null'">
         <span>Verlag: </span> <br />
@@ -43,7 +47,7 @@
         {{ book.language }}
       </p>
       <p *ngIf="book.isbn !== 'null'">
-        <span>ISBN-10: </span> <br />
+        <span>ISBN: </span> <br />
         {{ book.isbn }}
       </p>
       <p *ngIf="book.infoLink">
@@ -53,10 +57,6 @@
       <p *ngIf="book.webReaderLink !== 'null'">
         <span>WebReaderLink: </span> <br />
         <a href="{{ book.webReaderLink }}" target="_blank">{{ book.webReaderLink }}</a>
-      </p>
-      <p *ngIf="book.textSnippet !== 'null'">
-        <span>TextSnippet: </span> <br />
-        {{ book.textSnippet }}
       </p>
     </div>
   </div>

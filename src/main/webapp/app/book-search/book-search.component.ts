@@ -1,17 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IBook } from '../entities/book/book.model';
+import { BookCardComponent } from 'app/book-card/book-card.component';
+import { NgFor } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
+  standalone: true,
   selector: 'jhi-book-search',
   templateUrl: './book-search.component.html',
   styleUrls: ['./book-search.component.scss'],
+  imports: [RouterModule, BookCardComponent, NgFor],
 })
 export class BookSearchComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   books: IBook[] = [];
-
+  newBooks: IBook[] = [];
+  themen: String[] = [];
   async getBooks(thema: String) {
     var url = 'https://www.googleapis.com/books/v1/volumes?q=' + thema;
 
@@ -38,11 +44,86 @@ export class BookSearchComponent implements OnInit {
     //Add 'implements OnInit' to the class.
   }
 
+  searchThema(thema) {
+    this.newBooks = [];
+    this.getBooks(thema).then(data => {
+      var dataArray = data as any;
+      console.log(dataArray);
+      console.log(typeof dataArray);
+
+      var firstElement = dataArray[Object.keys(dataArray)[2]];
+      var len = Object.keys(firstElement).length;
+      console.log(dataArray[Object.keys(dataArray)[2]]);
+
+      for (let i = 0; i < len; i++) {
+        let newBook: IBook = {
+          id: i,
+          name: dataArray[Object.keys(dataArray)[2]][i]?.volumeInfo.title,
+          title: dataArray[Object.keys(dataArray)[2]][i]?.volumeInfo.title,
+
+          subTitle: dataArray[Object.keys(dataArray)[2]][i]?.volumeInfo?.subtitle,
+
+          description: dataArray[Object.keys(dataArray)[2]][i]?.volumeInfo?.description,
+
+          language: dataArray[Object.keys(dataArray)[2]][i]?.volumeInfo?.language,
+
+          listPrice: dataArray[Object.keys(dataArray)[2]][i]?.saleInfo?.listPrice?.amount.toString(),
+
+          image: dataArray[Object.keys(dataArray)[2]][i]?.volumeInfo?.imageLinks?.thumbnail,
+
+          pageCount: dataArray[Object.keys(dataArray)[2]][i]?.volumeInfo?.pageCount,
+
+          averageRating: dataArray[Object.keys(dataArray)[2]][i]?.volumeInfo?.averageRating,
+
+          ratingCount: dataArray[Object.keys(dataArray)[2]][i]?.volumeInfo?.ratingCount,
+
+          author: dataArray[Object.keys(dataArray)[2]][i]?.volumeInfo?.authors?.[0]?.toString(),
+
+          isbn: dataArray[Object.keys(dataArray)[2]][i]?.volumeInfo?.industryIdentifiers?.[1]?.identifier,
+
+          infoLink: dataArray[Object.keys(dataArray)[2]][i]?.volumeInfo?.infoLink,
+
+          webReaderLink: dataArray[Object.keys(dataArray)[2]][i]?.accessInfo?.webReaderLink,
+
+          longDescription: dataArray[Object.keys(dataArray)[2]][i]?.volumeInfo?.description,
+
+          textSnippet: dataArray[Object.keys(dataArray)[2]][i]?.searchInfo?.textSnippet,
+        };
+        console.log(newBook);
+        this.books.push(newBook);
+        this.newBooks.push(newBook);
+      }
+      for (let i = 0; i < this.newBooks.length; i++) {
+        this.postBook(this.newBooks[i], i);
+        console.log();
+      }
+    });
+  }
+
   makeRequest(): void {
     var thema;
 
     thema = (<HTMLInputElement>document.getElementById('thema')).value;
     console.log(thema);
+
+    const headers = new HttpHeaders()
+      .set('accept', '*/*')
+      .set(
+        'Authorization',
+        'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY5MDIwODA5NiwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNjkwMTIxNjk2fQ.dUjOBUnJKeT_KfNhIUW3fhVRQn7saqh9PD9wDfDNifURG6KZoN50y_AN9zMK0xHXkuzLnMBoygmfqqKuAV3VTg'
+      );
+    let url = 'http://localhost:9000/api/chat?prompt=';
+    let prompt =
+      'Gib mir gute über Themen für Bücher über: "' +
+      thema +
+      '". Ausgabe in einer Zeile und getrennt durch ";" keine beschreibung zu den über Themen schreiben. Schreibe genau 15 sachen aber ohne eine nummerierung. Ausgabe auch in einen JSON gültigen format.';
+    url = url + prompt;
+    this.http.get(url, { headers }).subscribe(data => {
+      console.log(data);
+      this.themen = data['Themen'].split(';');
+      console.log(this.themen);
+    });
+    return;
     this.getBooks(thema).then(data => {
       var dataArray = data as any;
       console.log(dataArray);
@@ -75,7 +156,7 @@ export class BookSearchComponent implements OnInit {
 
           ratingCount: dataArray[Object.keys(dataArray)[2]][i]?.volumeInfo?.ratingCount,
 
-          author: dataArray[Object.keys(dataArray)[2]][i]?.volumeInfo?.authors[0].toString(),
+          author: dataArray[Object.keys(dataArray)[2]][i]?.volumeInfo?.authors?.[0]?.toString(),
 
           isbn: dataArray[Object.keys(dataArray)[2]][i]?.volumeInfo?.industryIdentifiers?.[1]?.identifier,
 
@@ -91,13 +172,16 @@ export class BookSearchComponent implements OnInit {
         books.push(newBook);
       }
       for (let i = 0; i < books.length; i++) {
-        this.postBook(books[i]);
         console.log();
       }
     });
   }
 
-  postBook(book: IBook) {
+  openNewTab(url) {
+    window.open(url, '_blank');
+  }
+
+  postBook(book: IBook, i) {
     console.log(book);
     const url = 'http://localhost:9000/api/books';
 
@@ -105,7 +189,7 @@ export class BookSearchComponent implements OnInit {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization:
-        'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY4OTk3NDA5NywiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNjg5ODg3Njk3fQ.veaH5nIEKb2GVKad1hg8AsgECwSII23dZ0cxxxr9GKHh2mNJfnDKC9Ckmh0J0wSn42sezzvnXzeAZUKkdSZdHA',
+        'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY5MDIwODA5NiwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNjkwMTIxNjk2fQ.dUjOBUnJKeT_KfNhIUW3fhVRQn7saqh9PD9wDfDNifURG6KZoN50y_AN9zMK0xHXkuzLnMBoygmfqqKuAV3VTg',
       accept: '*/*',
     });
 
@@ -143,6 +227,7 @@ export class BookSearchComponent implements OnInit {
     this.http.post(url, requestBody, { headers }).subscribe(
       response => {
         // Handle the response here
+        this.books[this.books.length - this.newBooks.length + i].id = response['id'];
         console.log(response);
       },
       error => {

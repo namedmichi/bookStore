@@ -1,4 +1,10 @@
 <h1 class="heading">Bücherliste</h1>
+<p class="bookCounter">{{ bookCount }}. Bücher</p>
+<mat-form-field appearance="outline" id="nameFormField">
+  <mat-label>Name eingeben</mat-label>
+  <input (keydown)="searchName()" matInput placeholder="Name" id="nameInput" />
+</mat-form-field>
+
 <div class="row">
   <div class="bookContainer">
     <jhi-book-card *ngFor="let item of books" [book]="item" class="bookCard" routerLink="{{ item.id }}"></jhi-book-card>

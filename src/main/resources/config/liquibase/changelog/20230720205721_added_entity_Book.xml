@@ -110,4 +110,10 @@
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>
+    <changeSet  author="jhipster"  id="addUniqueConstraint-example">  
+    <addUniqueConstraint  
+            columnNames="name"  
+            tableName="book"
+            validate="true"/>  
+</changeSet>
 </databaseChangeLog>

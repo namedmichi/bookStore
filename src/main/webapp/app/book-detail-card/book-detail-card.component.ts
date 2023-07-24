@@ -13,7 +13,7 @@ import { NgIf } from '@angular/common';
 })
 export class BookDetailCardComponent implements OnInit {
   book: IBook;
-
+  id: number;
   constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
   ngOnInit(): void {
@@ -22,17 +22,30 @@ export class BookDetailCardComponent implements OnInit {
     this.route.params.subscribe(params => {
       let id = params['myBook'];
       console.log(id);
+      this.id = id;
       var url = 'http://localhost:9000/api/books/' + id;
       const headers = new HttpHeaders()
         .set('accept', '*/*')
         .set(
           'Authorization',
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY4OTk3NDA5NywiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNjg5ODg3Njk3fQ.veaH5nIEKb2GVKad1hg8AsgECwSII23dZ0cxxxr9GKHh2mNJfnDKC9Ckmh0J0wSn42sezzvnXzeAZUKkdSZdHA'
+          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY5MDIwODA5NiwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNjkwMTIxNjk2fQ.dUjOBUnJKeT_KfNhIUW3fhVRQn7saqh9PD9wDfDNifURG6KZoN50y_AN9zMK0xHXkuzLnMBoygmfqqKuAV3VTg'
         );
       this.http.get(url, { headers }).subscribe(data => {
         this.book = data as IBook;
         console.log(this.book);
       });
+    });
+  }
+
+  delEntry(): void {
+    const headers = new HttpHeaders()
+      .set('accept', '*/*')
+      .set(
+        'Authorization',
+        'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY4OTk3NDA5NywiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNjg5ODg3Njk3fQ.veaH5nIEKb2GVKad1hg8AsgECwSII23dZ0cxxxr9GKHh2mNJfnDKC9Ckmh0J0wSn42sezzvnXzeAZUKkdSZdHA'
+      );
+    this.http.delete('http://localhost:9000/api/books/' + this.id, { headers }).subscribe(data => {
+      console.log(data);
     });
   }
 }

@@ -1,3 +1,12 @@
 <h1>Themen Suche</h1>
 <input type="text" name="thema" id="thema" />
 <button (click)="makeRequest()">Abfrage</button>
+<div class="themsContainer">
+  <div *ngFor="let item of themen" class="themaContainer">
+    <p>{{ item }}</p>
+    <button (click)="searchThema(item)">Bücher über dieses Thema suchen</button>
+  </div>
+</div>
+<div class="bookContainer">
+  <jhi-book-card *ngFor="let item of books" [book]="item" class="bookCard" (click)="openNewTab('/' + item.id)"></jhi-book-card>
+</div>

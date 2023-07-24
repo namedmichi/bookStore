@@ -1,0 +1,28 @@
+.bookContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.bookCard {
+  width: 31%;
+  height: 480px;
+  margin-right: 20px;
+  margin-left: 20px;
+  background-color: gray;
+  padding: 20px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+.themsContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+.themaContainer {
+  display: flex;
+  margin: 40px;
+  align-items: center;
+
+  p {
+    margin-right: 20px;
+  }
+}
