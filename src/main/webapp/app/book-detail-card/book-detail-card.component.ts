@@ -24,12 +24,8 @@ export class BookDetailCardComponent implements OnInit {
       console.log(id);
       this.id = id;
       var url = 'http://localhost:9000/api/books/' + id;
-      const headers = new HttpHeaders()
-        .set('accept', '*/*')
-        .set(
-          'Authorization',
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY5MDM1MjE4OCwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNjkwMjY1Nzg4fQ.IRTTud1czNHLQXmNfX8Zh14M4vS_iI92UYL4gJfDkVXyMHjtRnpYkYZvUW3VR7x3sXNulwnzozasX4vrgkthlA'
-        );
+      const headers = new HttpHeaders().set('accept', '*/*');
+
       this.http.get(url, { headers }).subscribe(data => {
         this.book = data as IBook;
         console.log(this.book);
@@ -38,12 +34,8 @@ export class BookDetailCardComponent implements OnInit {
   }
 
   delEntry(): void {
-    const headers = new HttpHeaders()
-      .set('accept', '*/*')
-      .set(
-        'Authorization',
-        'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY5MDM1MjE4OCwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNjkwMjY1Nzg4fQ.IRTTud1czNHLQXmNfX8Zh14M4vS_iI92UYL4gJfDkVXyMHjtRnpYkYZvUW3VR7x3sXNulwnzozasX4vrgkthlA'
-      );
+    const headers = new HttpHeaders().set('accept', '*/*');
+
     this.http.delete('http://localhost:9000/api/books/' + this.id, { headers }).subscribe(data => {
       console.log(data);
     });

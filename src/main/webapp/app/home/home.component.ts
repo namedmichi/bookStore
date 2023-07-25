@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -12,13 +12,14 @@ import { IBook } from '../entities/book/book.model';
 import { forkJoin } from 'rxjs'; // Don't forget to import forkJoin
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { CdkVirtualScrollViewport, ScrollingModule } from '@angular/cdk/scrolling';
 
 @Component({
   standalone: true,
   selector: 'jhi-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [SharedModule, RouterModule, BookCardComponent, FormsModule, ReactiveFormsModule],
+  imports: [SharedModule, RouterModule, BookCardComponent, FormsModule, ReactiveFormsModule, ScrollingModule],
   animations: [
     trigger('slideInOut', [
       state(
@@ -44,9 +45,12 @@ export default class HomeComponent implements OnInit, OnDestroy {
   bookCount: number = 0;
   toppings = new FormControl('');
   toppingList: string[] = ['Name', 'Preis', 'Seitenanzahl', 'ISBN', 'Sprache'];
-  sortString: string = '&sort=';
+  sortStringTemplate: string = '&sort=';
+  sortString: string = '';
   sortCount: number = 0;
   sortBool: boolean = false;
+  order = 'asc';
+  firstStart: boolean = true;
   private readonly destroy$ = new Subject<void>();
 
   constructor(private accountService: AccountService, private router: Router, private http: HttpClient) {}
@@ -58,34 +62,73 @@ export default class HomeComponent implements OnInit, OnDestroy {
       .subscribe(account => (this.account = account));
     this.getBooks();
   }
+
+  sortOrder(order) {
+    if (order == 'asc' && this.order != 'asc') {
+      console.log(order);
+      this.sortString = this.sortString.replace('desc', 'asc');
+      this.order = order;
+      this.getBooks();
+      return;
+    } else if (order == 'desc' && this.order != 'desc') {
+      console.log(order);
+      this.sortString = this.sortString.replace('asc', 'desc');
+      this.order = order;
+      this.getBooks();
+      return;
+    }
+  }
+
   addSort(item) {
     console.log(item);
+    if (item == 'Name') {
+      item = 'name';
+    }
+    if (item == 'Preis') {
+      item = 'listPrice';
+    }
+    if (item == 'Seitenanzahl') {
+      item = 'pageCount';
+    }
+    if (item == 'ISBN') {
+      item = 'isbn';
+    }
+    if (item == 'Sprache') {
+      item = 'language';
+    }
+
     if (this.sortString.includes(item + ',')) {
-      this.sortString = this.sortString.replace(item + ',', '');
+      this.sortString = this.sortString.replace(item + ',' + this.order, '');
       this.sortCount--;
       if (this.sortCount == 0) {
         this.sortBool = false;
         console.log(this.sortString);
         console.log(this.sortBool);
       }
+      this.getBooks();
       return;
     }
-    this.sortString = this.sortString + item + ',';
+    this.sortString += this.sortStringTemplate + item + ',' + this.order;
     this.sortCount++;
     this.sortBool = true;
     console.log(this.sortString);
     console.log(this.sortBool);
+    this.getBooks();
   }
 
+  @ViewChild(CdkVirtualScrollViewport) viewPort: CdkVirtualScrollViewport;
+  scrollToTop() {
+    console.log(this.viewPort);
+    this.viewPort.scrollToIndex(0, 'smooth');
+  }
   getBooks() {
+    if (!this.firstStart) {
+      this.scrollToTop();
+    }
+    this.firstStart = false;
     var url2 = 'http://localhost:9000/api/books/count';
     // Set the headers
-    const headers = new HttpHeaders()
-      .set('accept', '*/*')
-      .set(
-        'Authorization',
-        'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY5MDM1MjE4OCwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNjkwMjY1Nzg4fQ.IRTTud1czNHLQXmNfX8Zh14M4vS_iI92UYL4gJfDkVXyMHjtRnpYkYZvUW3VR7x3sXNulwnzozasX4vrgkthlA'
-      );
+    const headers = new HttpHeaders().set('accept', '*/*');
 
     this.http.get(url2, { headers }).subscribe(
       response => {
@@ -98,6 +141,7 @@ export default class HomeComponent implements OnInit, OnDestroy {
           var url = 'http://localhost:9000/api/books?page=' + index + '&size=20';
           if (this.sortBool) {
             url = url + this.sortString;
+            console.log(url);
           }
           this.http.get(url, { headers }).subscribe(
             response => {
@@ -140,18 +184,14 @@ export default class HomeComponent implements OnInit, OnDestroy {
     console.log(searchString);
     if (value == null || value == '') {
       this.getBooks();
+
       return;
     }
 
     var url2 = 'http://localhost:9000/api/books/count';
     url2 = url2 + '?' + searchString;
     // Set the headers
-    const headers = new HttpHeaders()
-      .set('accept', '*/*')
-      .set(
-        'Authorization',
-        'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY5MDM1MjE4OCwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNjkwMjY1Nzg4fQ.IRTTud1czNHLQXmNfX8Zh14M4vS_iI92UYL4gJfDkVXyMHjtRnpYkYZvUW3VR7x3sXNulwnzozasX4vrgkthlA'
-      );
+    const headers = new HttpHeaders().set('accept', '*/*');
 
     this.http.get(url2, { headers }).subscribe(
       response => {
