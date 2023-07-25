@@ -116,11 +116,15 @@ export class BookSearchComponent implements OnInit {
     let prompt =
       'Gib mir gute über Themen für Bücher über: "' +
       thema +
-      '". Ausgabe in einer Zeile und getrennt durch ";" keine beschreibung zu den über Themen schreiben. Schreibe genau 15 sachen aber ohne eine nummerierung. Ausgabe auch in einen JSON gültigen format.';
+      '". Ausgabe in einer Zeile und getrennt durch ";" keine beschreibung zu den über Themen schreiben. Schreibe genau 15 sachen aber ohne eine nummerierung. Ausgabe auch in einen JSON gültigen format mit dem key topics.';
     url = url + prompt;
     this.http.get(url, { headers }).subscribe(data => {
       console.log(data);
-      this.themen = data['Themen'].split(';');
+      try {
+        this.themen = data['topics'].split(';');
+      } catch (error) {
+        this.themen = data['topics'];
+      }
       console.log(this.themen);
     });
     return;
@@ -188,8 +192,6 @@ export class BookSearchComponent implements OnInit {
     // Define the headers for the request
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization:
-        'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY5MDM1MjE4OCwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNjkwMjY1Nzg4fQ.IRTTud1czNHLQXmNfX8Zh14M4vS_iI92UYL4gJfDkVXyMHjtRnpYkYZvUW3VR7x3sXNulwnzozasX4vrgkthlA',
       accept: '*/*',
     });
 
