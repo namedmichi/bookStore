@@ -153,4 +153,4 @@ Desktop.ini
 ######################
 # Keys
 ######################
-/src/main/resources/config/application.yml
+src/main/resources/config/application.yml
