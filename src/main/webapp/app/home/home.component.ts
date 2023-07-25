@@ -84,7 +84,7 @@ export default class HomeComponent implements OnInit, OnDestroy {
       .set('accept', '*/*')
       .set(
         'Authorization',
-        'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY5MDIwODA5NiwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNjkwMTIxNjk2fQ.dUjOBUnJKeT_KfNhIUW3fhVRQn7saqh9PD9wDfDNifURG6KZoN50y_AN9zMK0xHXkuzLnMBoygmfqqKuAV3VTg'
+        'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY5MDM1MjE4OCwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNjkwMjY1Nzg4fQ.IRTTud1czNHLQXmNfX8Zh14M4vS_iI92UYL4gJfDkVXyMHjtRnpYkYZvUW3VR7x3sXNulwnzozasX4vrgkthlA'
       );
 
     this.http.get(url2, { headers }).subscribe(
@@ -150,7 +150,7 @@ export default class HomeComponent implements OnInit, OnDestroy {
       .set('accept', '*/*')
       .set(
         'Authorization',
-        'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY5MDIwODA5NiwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNjkwMTIxNjk2fQ.dUjOBUnJKeT_KfNhIUW3fhVRQn7saqh9PD9wDfDNifURG6KZoN50y_AN9zMK0xHXkuzLnMBoygmfqqKuAV3VTg'
+        'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY5MDM1MjE4OCwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNjkwMjY1Nzg4fQ.IRTTud1czNHLQXmNfX8Zh14M4vS_iI92UYL4gJfDkVXyMHjtRnpYkYZvUW3VR7x3sXNulwnzozasX4vrgkthlA'
       );
 
     this.http.get(url2, { headers }).subscribe(

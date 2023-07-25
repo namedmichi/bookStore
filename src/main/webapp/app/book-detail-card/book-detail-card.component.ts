@@ -28,7 +28,7 @@ export class BookDetailCardComponent implements OnInit {
         .set('accept', '*/*')
         .set(
           'Authorization',
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY5MDIwODA5NiwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNjkwMTIxNjk2fQ.dUjOBUnJKeT_KfNhIUW3fhVRQn7saqh9PD9wDfDNifURG6KZoN50y_AN9zMK0xHXkuzLnMBoygmfqqKuAV3VTg'
+          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY5MDM1MjE4OCwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNjkwMjY1Nzg4fQ.IRTTud1czNHLQXmNfX8Zh14M4vS_iI92UYL4gJfDkVXyMHjtRnpYkYZvUW3VR7x3sXNulwnzozasX4vrgkthlA'
         );
       this.http.get(url, { headers }).subscribe(data => {
         this.book = data as IBook;
@@ -42,7 +42,7 @@ export class BookDetailCardComponent implements OnInit {
       .set('accept', '*/*')
       .set(
         'Authorization',
-        'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY4OTk3NDA5NywiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNjg5ODg3Njk3fQ.veaH5nIEKb2GVKad1hg8AsgECwSII23dZ0cxxxr9GKHh2mNJfnDKC9Ckmh0J0wSn42sezzvnXzeAZUKkdSZdHA'
+        'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY5MDM1MjE4OCwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNjkwMjY1Nzg4fQ.IRTTud1czNHLQXmNfX8Zh14M4vS_iI92UYL4gJfDkVXyMHjtRnpYkYZvUW3VR7x3sXNulwnzozasX4vrgkthlA'
       );
     this.http.delete('http://localhost:9000/api/books/' + this.id, { headers }).subscribe(data => {
       console.log(data);
