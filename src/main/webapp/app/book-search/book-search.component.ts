@@ -106,12 +106,8 @@ export class BookSearchComponent implements OnInit {
     thema = (<HTMLInputElement>document.getElementById('thema')).value;
     console.log(thema);
 
-    const headers = new HttpHeaders()
-      .set('accept', '*/*')
-      .set(
-        'Authorization',
-        'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY5MDM1MjE4OCwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNjkwMjY1Nzg4fQ.IRTTud1czNHLQXmNfX8Zh14M4vS_iI92UYL4gJfDkVXyMHjtRnpYkYZvUW3VR7x3sXNulwnzozasX4vrgkthlA'
-      );
+    const headers = new HttpHeaders().set('accept', '*/*');
+
     let url = 'http://localhost:9000/api/chat?prompt=';
     let prompt =
       'Gib mir gute über Themen für Bücher über: "' +

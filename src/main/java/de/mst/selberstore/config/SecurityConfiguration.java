@@ -71,6 +71,7 @@ public class SecurityConfiguration {
                     .requestMatchers("/api/books").permitAll()
                     .requestMatchers("/api/books/**").permitAll()
                     .requestMatchers("/api/books/count").permitAll()
+                    .requestMatchers("/api/chat").permitAll()
                     .requestMatchers("/api/admin/**").hasAuthority(AuthoritiesConstants.ADMIN)
                     .requestMatchers("/api/**").authenticated()
                     .requestMatchers("/v3/api-docs/**").hasAuthority(AuthoritiesConstants.ADMIN)
